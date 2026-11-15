@@ -1,0 +1,11 @@
+# Код ЛР 2 (lib/src без async/, bin/fleet_service.dart) з увімкненими лінтами:
+Analyzing service_record.dart, repository.dart, loader.dart, fleet_service.dart...
+No issues found!
+
+# Демонстраційний код ЛР 3 без приглушень ignore:
+Analyzing futures_demo.dart...
+
+   info - futures_demo.dart:27:14 - Missing an 'await' for the 'Future' computed by this expression. Try adding an 'await' or wrapping the expression with 'unawaited'. - unawaited_futures
+   info - futures_demo.dart:109:20 - 'Future'-returning calls in a non-'async' function. Try converting the enclosing function to be 'async' and then 'await' the future, or wrap the expression in 'unawaited'. - discarded_futures
+
+2 issues found.

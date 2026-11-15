@@ -14,15 +14,11 @@ class Repository<T extends Identifiable> {
   Iterable<T> get all => _items.values;
 
   /// Додає [item]; повертає `true`, якщо елемента з таким `id` ще не було.
-  ///
-  /// Якщо елемент із тим самим `id` уже є, сховище не змінюється, а метод
-  /// повертає `false`: дублікат відкидається, перший запис зберігається.
+  /// Наявний елемент із тим самим `id` замінюється.
   bool add(T item) {
-    if (_items.containsKey(item.id)) {
-      return false;
-    }
+    final isNew = !_items.containsKey(item.id);
     _items[item.id] = item;
-    return true;
+    return isNew;
   }
 
   /// Знаходить елемент за ідентифікатором [id] або повертає `null`.

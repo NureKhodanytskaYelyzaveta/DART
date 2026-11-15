@@ -20,12 +20,6 @@ const double expensiveJobUah = 15000;
 /// Вартість, починаючи з якої робота вважається середньою за ціною, грн.
 const double mediumJobUah = 3000;
 
-/// Інтервал між замінами моторної оливи, км.
-const int oilChangeIntervalKm = 10000;
-
-/// Інтервал між сезонними замінами коліс, км.
-const int tireServiceIntervalKm = 20000;
-
 /// Інтервал між технічними оглядами, км.
 const int inspectionIntervalKm = 30000;
 

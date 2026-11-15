@@ -1,25 +1,9 @@
 import 'dart:io';
 
 import 'package:fleet_service/fleet_service.dart';
-import 'package:fleet_service/src/legacy/record_without_hash.dart';
-import 'package:fleet_service/src/legacy/service_record_classic.dart';
 
 /// Умовна «поточна» дата, щоб вивід програми був відтворюваним.
 final DateTime today = DateTime(2026, 11, 5);
-
-/// Пробіг, для якого виводиться таблиця наступних робіт, км.
-const int demoMileageKm = 100000;
-
-/// Кількість записів у демонстрації зразків із `when`.
-const int previewCount = 8;
-
-/// Ширини колонок таблиць виводу.
-const int monthsWidth = 2;
-const int labelWidth = 16;
-const int titleWidth = 24;
-const int enumNameWidth = 15;
-const int codeWidth = 10;
-const int shortLabelWidth = 15;
 
 void out(Object? value) => stdout.writeln(value);
 
@@ -38,7 +22,7 @@ void main() {
   final again = ServiceRecord.cached(sampleLines.first);
   out('cached повертає той самий екземпляр: ${identical(first, again)}');
   out(
-    'fromCsv повертає той самий екземпляр: '
+    'fromCsv створює новий екземпляр: '
     '${identical(first, ServiceRecord.fromCsv(sampleLines.first))}',
   );
   out(
@@ -60,13 +44,13 @@ void main() {
   out('З hashCode:   c == d → ${c == d}, розмір Set → ${{c, d}.length}');
 
   section('Крок 5–6. Запечатана ієрархія й switch без default');
-  out('Для пробігу $demoMileageKm км; «далі» — пробіг наступної роботи:');
+  out('Для пробігу 100000 км; «далі» — пробіг наступної роботи:');
   for (final type in WorkType.values) {
     final category = type.category;
-    final months = warrantyMonths(category).toString().padLeft(monthsWidth);
+    final months = warrantyMonths(category).toString().padLeft(2);
     out(
-      '${type.label.padRight(labelWidth)} ${category.title.padRight(titleWidth)} '
-      'гар. $months міс., далі: ${category.nextDueKm(demoMileageKm) ?? "—"}',
+      '${type.label.padRight(16)} ${category.title.padRight(24)} '
+      'гар. $months міс., далі: ${category.nextDueKm(100000) ?? "—"}',
     );
   }
 
@@ -106,7 +90,7 @@ void main() {
   section('Крок 10. Перелічення WorkType із членами');
   for (final type in WorkType.values) {
     out(
-      '${type.name.padRight(enumNameWidth)} код=${type.code.padRight(codeWidth)} '
+      '${type.name.padRight(15)} код=${type.code.padRight(10)} '
       'планова=${type.isPlanned}',
     );
   }
@@ -127,9 +111,9 @@ void main() {
   }
 
   section('Крок 12. Зіставлення зі зразком і охоронцями (when)');
-  for (final record in recordRepo.all.take(previewCount)) {
+  for (final record in recordRepo.all.take(8)) {
     out(
-      '${record.plate} ${record.workType.label.padRight(shortLabelWidth)} → '
+      '${record.plate} ${record.workType.label.padRight(15)} → '
       '${costBand(record)}',
     );
   }

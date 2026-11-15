@@ -1,4 +1,3 @@
-import 'constants.dart';
 import 'service_category.dart';
 
 /// Тип виконаних робіт; перелічення з полями, конструктором і методами.
@@ -13,14 +12,10 @@ enum WorkType(
   final ServiceCategory category,
 ) {
   /// Заміна моторної оливи й масляного фільтра.
-  oilChange('oil', 'Заміна оливи', Routine(intervalKm: oilChangeIntervalKm)),
+  oilChange('oil', 'Заміна оливи', Routine(intervalKm: 10000)),
 
   /// Сезонна заміна й балансування коліс.
-  tireService(
-    'tires',
-    'Шиномонтаж',
-    Routine(intervalKm: tireServiceIntervalKm),
-  ),
+  tireService('tires', 'Шиномонтаж', Routine(intervalKm: 20000)),
 
   /// Ремонт гальмівної системи.
   brakeRepair('brakes', 'Ремонт гальм', Repair(complex: false)),
